@@ -1,0 +1,35 @@
+# 🐍 Arquivos Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.swp
+
+# 🚀 Configurações do Django
+*.sqlite3
+db.sqlite3
+/media/
+staticfiles/
+*.log
+*.pot
+*.pyc
+.env
+*.pem
+
+# 📦 Ambientes Virtuais
+venv/
+.env/
+
+# 📂 Arquivos do VSCode, PyCharm e outros editores
+.vscode/
+.idea/
+*.iml
+
+# 📄 Arquivos de migração do Django (opcional)
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# 🔥 Node.js (caso use frontend com npm/yarn)
+node_modules/
+package-lock.json
+yarn.lock
