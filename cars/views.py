@@ -4,7 +4,7 @@ from cars.models import Car
 
 def cars_views(request):
     # Primeiro buscou todos os carros
-    cars = Car.objects.all()
+    cars = Car.objects.all().order_by('model')
     # Verifica se o usuario mandou alguma busca
     search = request.GET.get('search')
     # Se mandou,
