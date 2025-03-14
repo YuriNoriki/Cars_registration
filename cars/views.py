@@ -3,7 +3,10 @@ from cars.models import Car
 
 
 def cars_views(request):
-    cars = Car.objects.all()
+
+    print(request.GET.get('search'))
+
+    cars = Car.objects.filter(model__icontains = 'a')
 
     context = {
     'cars': cars,
