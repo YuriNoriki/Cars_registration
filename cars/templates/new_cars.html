@@ -1,0 +1,8 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %} 
+        {{new_cars_form}}
+    </form>
+{% endblock content %}
