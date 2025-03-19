@@ -1,8 +1,14 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-    <form method="post" enctype="multipart/form-data">
+    
+    <form class = "form-cad" method="post" enctype="multipart/form-data">
         {% csrf_token %} 
-        {{new_cars_form}}
+        <table>
+            {{new_cars_form.as_table}}
+        </table>
+        <input type="submit" value="Cadastrar" class = "btn">
+      
     </form>
+    
 {% endblock content %}
