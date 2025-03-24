@@ -1,0 +1,9 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+    <form class="form-login" method="POST">
+        {% csrf_token %}
+        {{login_form.as_table}}
+        <input class = "input-login" type="submit" value = "Entrar">
+    </form>
+{% endblock content %}
