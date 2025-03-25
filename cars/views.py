@@ -1,31 +1,27 @@
 from django.shortcuts import render,redirect
 from cars.models import Car
 from cars.forms import  CarModelForm
+from django.views import View
 
 
-def cars_views(request):
-    # Primeiro buscou todos os carros
-    cars = Car.objects.all().order_by('model')
-    # Verifica se o usuario mandou alguma busca
-    search = request.GET.get('search') 
-    # Se mandou,
-    if search:
-        #cars. filter vai filtrar os carros que ja mandou buscar(cars = Car.objects.all)
-        cars = cars.filter(model__icontains = search)
+class CarsView(View):
+    def get(self, request):
+        cars = Car.objects.all().order_by('model')
+        search = request.GET.get('search') 
+    
+        if search:
+            cars = cars.filter(model__icontains = search) 
+            
+        context = {
+        'cars': cars,
+        }
 
+        return render(
+            request,
+            'cars.html',
+            context,
+        )
 
-    #for car in cars:
-        #print(f"Modelo: {car.model}, Ano: {car.factory_year}, Preço: {car.value}") 
-        
-    context = {
-    'cars': cars,
-    }
-
-    return render(
-        request,
-        'cars.html',
-        context,
-    )
 
 def new_cars_views(request):
     if request.method == 'POST':
@@ -50,3 +46,16 @@ def new_cars_views(request):
         'new_cars.html',
         context,
     )
+
+class NewCarsView(View):
+
+    def get(self,request):
+        new_cars_form = CarModelForm()
+        return render(request,'new_cars.html',{'new_cars_form': new_cars_form})
+    
+    def post(self,request):
+        new_cars_form = CarModelForm(request.POST, request.FILES)
+        if new_cars_form.is_valid():
+            new_cars_form.save()
+            return redirect('cars_list')
+        return render(request, 'new_cars.html', {'new_cars_form': new_cars_form})
