@@ -2,50 +2,25 @@ from django.shortcuts import render,redirect
 from cars.models import Car
 from cars.forms import  CarModelForm
 from django.views import View
+from django.views.generic import ListView
 
 
-class CarsView(View):
-    def get(self, request):
-        cars = Car.objects.all().order_by('model')
-        search = request.GET.get('search') 
-    
-        if search:
-            cars = cars.filter(model__icontains = search) 
-            
-        context = {
-        'cars': cars,
-        }
+class CarListView(ListView):
+    model = Car
+    template_name = 'cars.html'
+    context_object_name = 'cars'
 
-        return render(
-            request,
-            'cars.html',
-            context,
-        )
-
-
-def new_cars_views(request):
-    if request.method == 'POST':
-        #print("Dados recebidos no POST:", request.POST)  # <-- Verifica os dados enviados
+    def get_queryset(self):
+        # Chama o método get_queryset() da classe ListView e retorna os objetos do modelo Car
+        cars = super().get_queryset().order_by('model')
         
-        new_cars_form = CarModelForm(request.POST, request.FILES)
-        if new_cars_form.is_valid():
-            #print("Dados validados:", new_cars_form.cleaned_data)  # <-- Verifica os dados limpos antes de salvar
-            new_cars_form.save()
-            return redirect('cars_list')
-        #else:
-            print("Erros no formulário:", new_cars_form.errors)  # <-- Verifica se há erros
-    else:
-        new_cars_form = CarModelForm()
-
-    context = {
-        'new_cars_form': new_cars_form,
-    }
-
-    return render(
-        request,
-        'new_cars.html',
-        context,
-    )
+         # Verifica se há um parâmetro de busca na URL (exemplo: ?search=Toyota)
+        search = self.request.GET.get('search')
+        
+         # Filtra os carros com base no termo de pesquisa (ignorando maiúsculas/minúsculas)
+        if search:
+            cars = cars.filter(model__icontains=search)
+        return cars
 
 class NewCarsView(View):
 
