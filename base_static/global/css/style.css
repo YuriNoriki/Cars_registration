@@ -412,3 +412,88 @@ select:focus {
 a {
   text-decoration: none !important;
 }
+
+/* ===== FORMULÁRIO EM COLUNA (SEM CAIXA) ===== */
+.form-update {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+}
+
+/* ===== TÍTULO DO FORMULÁRIO ===== */
+.form-update h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* ===== CAMPOS DE ENTRADA ===== */
+.form-update label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.form-update input[type="text"],
+.form-update input[type="number"],
+.form-update select,
+.form-update textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.form-update input:focus,
+.form-update select:focus,
+.form-update textarea:focus {
+  outline: none;
+  border-color: #0096c7;
+}
+
+/* ===== BOTÕES ===== */
+.form-update .buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.form-update .btn {
+  background-color: #0096c7;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.form-update .btn:hover {
+  background-color: #108eb8;
+}
+
+.form-update .btn-danger {
+  background-color: #d9534f;
+}
+
+.form-update .btn-danger:hover {
+  background-color: #d2221c;
+}
+
+/* ===== MENSAGENS DE ERRO E LINKS ===== */
+.form-update .error-message {
+  color: #d9534f;
+  font-size: 14px;
+  margin-top: -10px;
+}
+
+.form-update a {
+  text-decoration: none !important;
+}
