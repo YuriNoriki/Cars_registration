@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from cars.views import CarListView,NewCreateCar, CarDetailView, carUpdateView
+from cars.views import CarListView,NewCreateCar, CarDetailView, carUpdateView, CarDeleteView
 from accounts.views import register_views, login_views, logout_views
 
 urlpatterns = [
@@ -30,4 +30,5 @@ urlpatterns = [
     path('new_cars/', NewCreateCar.as_view(), name = 'new_car'),
     path('car/<int:pk>/', CarDetailView.as_view(), name = 'car_detail'),
     path('car/<int:pk>/update', carUpdateView.as_view(), name = 'car_update'),
+    path('car/<int:pk>/delete', CarDeleteView.as_view(), name = 'car_delete'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
