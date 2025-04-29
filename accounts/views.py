@@ -7,7 +7,7 @@ def register_views(request):
         user_form = UserCreationForm(request.POST)
         if user_form.is_valid():
             user_form.save()
-            redirect('login')
+            return redirect('login')
     else:
         user_form = UserCreationForm()
 
